@@ -41,12 +41,9 @@
         filtered resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <version.spring.framework>4.3.6.RELEASE</version.spring.framework>
         <!-- EAP component version management BOM -->
         <version.server.bom>19.1.0.Final</version.server.bom>
         <version.jboss.spec.jakartaee.8.0>1.0.1.Final</version.jboss.spec.jakartaee.8.0>
-        <version.org.apache.commons.commons-lang3>3.5</version.org.apache.commons.commons-lang3>
-        <httpclient.version>4.5.3</httpclient.version>
 
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -55,38 +52,11 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Add H2 dependency for embedded testing database -->
-            <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${version.h2db}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.5</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>1.2</version>
-            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${version.org.apache.commons.commons-lang3}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpclient.version}</version>
             </dependency>
             <!-- JBoss distributes a complete set of Java EE APIs including a Bill
             of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection)
@@ -134,15 +104,11 @@
         <finalName>ROOT</finalName>
         <plugins>
             <!-- The WildFly plug-in deploys your apps to a local JBoss EAP container -->
-            <!-- Disabling it here means that we don't try to deploy this POM! -->
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>${version.wildfly.maven.plugin}</version>
                 <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -197,22 +163,5 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <swarm.project.stage>local</swarm.project.stage>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
     </profiles>
 </project>

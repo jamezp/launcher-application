@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Vert.x Health Check Booster</title>
+    <title>WildFly Health Check Booster</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
@@ -13,7 +13,7 @@
 
     <div>
         <div class="sect1">
-<h2 id="_vert_x_health_check_booster">JBoss WildFly Health Check</h2>
+<h2 id="wildfly_health_check_booster">WildFly Health Check</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Demonstrates how the Kubernetes health checks work to determine if a container is still alive (the <em>liveness</em> of the container) and ready to serve the traffic for the HTTP endpoints of the application (the <em>readiness</em> of the container).</p>
@@ -51,14 +51,14 @@
     var attempts;
 
     function invokeService() {
-        var url = "http://" + window.location.hostname + ":9990/health";
+        var url = "http://" + window.location.hostname + "/health";
         $.getJSON(url, function (res) {
             $("#status-result").html(JSON.stringify(res));
         });
     }
 
     function invokeServiceandRetryUponFailures() {
-        var url = "http://" + window.location.hostname + ":9990/health";
+        var url = "http://" + window.location.hostname + "/health";
         $.getJSON(url, function (res) {
             var rebirth = new Date();
             var diff = (stopTime.getTime() - rebirth.getTime()) / 1000;
